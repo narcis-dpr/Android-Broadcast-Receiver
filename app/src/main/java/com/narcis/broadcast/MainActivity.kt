@@ -1,5 +1,6 @@
 package com.narcis.broadcast
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -15,6 +16,13 @@ import com.narcis.broadcast.ui.theme.AndroidBroadcastReciverTheme
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        /**
+         * sending a sample broadcast wit intent
+         */
+        val intent = Intent()
+        intent.action = "com.narcis.broadcast"
+        intent.putExtra("ImLive", 100)
+        sendBroadcast(intent)
         setContent {
             AndroidBroadcastReciverTheme {
                 // A surface container using the 'background' color from the theme
