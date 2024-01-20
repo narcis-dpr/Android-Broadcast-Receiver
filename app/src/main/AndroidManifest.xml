@@ -23,6 +23,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <receiver android:name=".receiver.MyReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="com.narcis.broadcat"> <!-- this intent filter is for android lower than 8 !-->
+
+                </action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
