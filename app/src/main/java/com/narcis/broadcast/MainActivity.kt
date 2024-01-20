@@ -22,6 +22,8 @@ class MainActivity : ComponentActivity() {
         val intent = Intent()
         intent.action = "com.narcis.broadcast"
         intent.putExtra("ImLive", 100)
+        intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES // intent is allowed to start a component when the application
+        //is stopped
         sendBroadcast(intent)
         setContent {
             AndroidBroadcastReciverTheme {
