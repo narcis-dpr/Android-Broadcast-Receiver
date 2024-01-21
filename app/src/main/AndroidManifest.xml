@@ -12,14 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AndroidBroadcastReciver"
         tools:targetApi="31">
+        <activity
+            android:name=".BoundServiceActivity"
+            android:exported="false"
+            android:label="@string/title_activity_bound_service"
+            android:theme="@style/Theme.AndroidBroadcastReciver" />
+
         <receiver
             android:name=".receiver.GoogleSampleReceiver"
-            android:permission="android.permission.BLUETOOTH_CONNECT"
             android:enabled="true"
-            android:exported="true">
-        <intent-filter>
-            <action android:name="android.intent.action.ACTION_FOUND"/>
-        </intent-filter>
+            android:exported="true"
+            android:permission="android.permission.BLUETOOTH_CONNECT">
+            <intent-filter>
+                <action android:name="android.intent.action.ACTION_FOUND" />
+            </intent-filter>
         </receiver>
         <receiver
             android:name=".receiver.ActionReceiver"
@@ -47,6 +53,13 @@
                 </action>
             </intent-filter>
         </receiver>
+
+        <service
+            android:name=".service.MyBoundService"
+            android:enabled="true"
+            android:exported="true"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":myprocess" />
     </application>
 
 </manifest>
