@@ -1,5 +1,6 @@
 package com.narcis.broadcast
 
+import android.content.BroadcastReceiver
 import android.content.Intent
 import android.content.IntentFilter
 import android.os.Bundle
@@ -17,10 +18,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
+import com.narcis.broadcast.receiver.ActionReceiver
 import com.narcis.broadcast.receiver.MyReceiver
 import com.narcis.broadcast.ui.theme.AndroidBroadcastReciverTheme
 
 class MainActivity : ComponentActivity() {
+    private var receiver: BroadcastReceiver? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /**
@@ -51,10 +54,11 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    Greeting("Android")
+                    Greeting({ broadcastIntent() })
                 }
             }
         }
+        configureReceiver()
     }
 
     fun broadcastIntent() {
@@ -63,16 +67,27 @@ class MainActivity : ComponentActivity() {
         intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
         sendBroadcast(intent)
     }
+    private fun configureReceiver() {
+        val filter = IntentFilter()
+        filter.addAction("com.narcis.broadcast")
+        receiver = ActionReceiver()
+        registerReceiver(receiver, filter)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        unregisterReceiver(receiver)
+    }
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
+fun Greeting(action: () -> Unit) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = action) {
             Text(
                 text = "Send Broadcast",
                 color = Color.Black,
@@ -85,6 +100,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     AndroidBroadcastReciverTheme {
-        Greeting("Android")
+        Greeting({})
     }
 }
