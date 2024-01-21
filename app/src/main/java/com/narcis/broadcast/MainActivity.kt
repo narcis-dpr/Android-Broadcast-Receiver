@@ -61,7 +61,7 @@ class MainActivity : ComponentActivity() {
         configureReceiver()
     }
 
-    fun broadcastIntent() {
+    private fun broadcastIntent() {
         val intent = Intent()
         intent.action = "com.narcis.broadcast"
         intent.flags = Intent.FLAG_INCLUDE_STOPPED_PACKAGES
@@ -70,6 +70,7 @@ class MainActivity : ComponentActivity() {
     private fun configureReceiver() {
         val filter = IntentFilter()
         filter.addAction("com.narcis.broadcast")
+        filter.addAction("android.intent.action.ACTION_POWER_DISCONNECTED")
         receiver = ActionReceiver()
         registerReceiver(receiver, filter)
     }
