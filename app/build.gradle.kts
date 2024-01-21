@@ -25,7 +25,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -66,4 +66,12 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+    // androidx core libraries :
+    implementation("androidx.core:core-role:1.0.0")
+    implementation("androidx.core:core-animation:1.0.0-rc01")
+    androidTestImplementation("androidx.core:core-animation-testing:1.0.0-rc01")
+    implementation("androidx.core:core-performance:1.0.0")
+    implementation("androidx.core:core-google-shortcuts:1.1.0")
+    implementation("androidx.core:core-remoteviews:1.0.0")
+    implementation("androidx.core:core-splashscreen:1.1.0-alpha02")
 }
