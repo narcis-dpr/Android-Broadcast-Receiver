@@ -22,6 +22,10 @@ import com.narcis.broadcast.explicitIntent.ui.theme.AndroidBroadcastReciverTheme
 class SecondActivityForExplicit : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // extracting intent data :
+        val extras = intent.extras ?: return
+        val qString = extras.getString("qString")
+
         setContent {
             AndroidBroadcastReciverTheme {
                 // A surface container using the 'background' color from the theme
@@ -29,7 +33,7 @@ class SecondActivityForExplicit : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    SecondViewForExplicit("Android")
+                    SecondViewForExplicit(qString?: "")
                 }
             }
         }
@@ -37,15 +41,19 @@ class SecondActivityForExplicit : ComponentActivity() {
 }
 
 @Composable
-fun SecondViewForExplicit(name: String) {
+fun SecondViewForExplicit(qString: String) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.Center,
     ) {
         val editText = remember { mutableStateOf("") }
-        Text(text = "Text View")
-        TextField(value = editText.value, onValueChange = {})
+        Text(text = qString)
+        TextField(
+            value = editText.value,
+            onValueChange =
+            { editText.value = it },
+        )
         Button(onClick = { /*TODO*/ }) {
             Text(text = "Return Text")
         }

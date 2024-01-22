@@ -19,9 +19,15 @@
             android:theme="@style/Theme.AndroidBroadcastReciver" />
         <activity
             android:name=".explicitIntent.ExplicitIntentActivity"
-            android:exported="false"
+            android:exported="true"
             android:label="@string/title_activity_explicit_intent"
-            android:theme="@style/Theme.AndroidBroadcastReciver" />
+            android:theme="@style/Theme.AndroidBroadcastReciver">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".BoundServiceActivity"
             android:exported="false"
@@ -47,11 +53,6 @@
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.AndroidBroadcastReciver">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
 
         <receiver
