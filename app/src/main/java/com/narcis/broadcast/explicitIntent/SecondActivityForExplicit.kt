@@ -1,5 +1,9 @@
 package com.narcis.broadcast.explicitIntent
 
+import android.app.Activity
+import android.app.Activity.RESULT_OK
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -33,15 +37,21 @@ class SecondActivityForExplicit : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background,
                 ) {
-                    SecondViewForExplicit(qString?: "")
+                    setResult(RESULT_OK)
+                    SecondViewForExplicit(qString?: "", context = this)
                 }
             }
         }
     }
+
+    override fun finish() {
+
+        super.finish()
+    }
 }
 
 @Composable
-fun SecondViewForExplicit(qString: String) {
+fun SecondViewForExplicit(qString: String, context: Activity) {
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -54,16 +64,22 @@ fun SecondViewForExplicit(qString: String) {
             onValueChange =
             { editText.value = it },
         )
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = { sendBackData(context, editText.value) }) {
             Text(text = "Return Text")
         }
     }
+}
+fun sendBackData(context: Activity, sendData: String) {
+   val data = Intent()
+   data.putExtra("returnData", sendData)
+   context.setResult(RESULT_OK, data)
+    context.finish()
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview4() {
     AndroidBroadcastReciverTheme {
-        SecondViewForExplicit("Android")
+        SecondViewForExplicit("Android", SecondActivityForExplicit())
     }
 }
