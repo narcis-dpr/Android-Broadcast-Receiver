@@ -13,6 +13,16 @@
         android:theme="@style/Theme.AndroidBroadcastReciver"
         tools:targetApi="31">
         <activity
+            android:name=".explicitIntent.SecondActivityForExplicit"
+            android:exported="false"
+            android:label="@string/title_activity_second_for_explicit"
+            android:theme="@style/Theme.AndroidBroadcastReciver" />
+        <activity
+            android:name=".explicitIntent.ExplicitIntentActivity"
+            android:exported="false"
+            android:label="@string/title_activity_explicit_intent"
+            android:theme="@style/Theme.AndroidBroadcastReciver" />
+        <activity
             android:name=".BoundServiceActivity"
             android:exported="false"
             android:label="@string/title_activity_bound_service"
