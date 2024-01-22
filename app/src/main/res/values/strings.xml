@@ -3,4 +3,5 @@
     <string name="title_activity_bound_service">BoundServiceActivity</string>
     <string name="title_activity_explicit_intent">ExplicitIntentActivity</string>
     <string name="title_activity_second_for_explicit">SecondActivityForExplicit</string>
+    <string name="title_activity_implicit_android">ImplicitAndroidActivity</string>
 </resources>
